@@ -40,7 +40,8 @@ def get_stats():
         "max_weight_reading": stats['max_weight_reading'],
         "min_weight_reading": stats['min_weight_reading'],
         "num_calories_readings": stats['num_calories_readings'],
-        "avg_calories_reading": stats['avg_calories_reading']
+        "avg_calories_reading": stats['avg_calories_reading'],
+        "last_updated": stats['last_updated']
     }
     logger.debug(f"Content of the dictionary: {new_stats}")
     logger.info("Request has completed")
