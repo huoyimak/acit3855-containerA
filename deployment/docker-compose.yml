@@ -52,7 +52,9 @@ services:
     image: storage
     ports:
       - '8090:8090'
-    depends_on: "kafka" & "db"
+    depends_on: 
+      - "kafka" 
+      - "db"
   processing:
     image: processing
     network_mode: "host"
