@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  description: This API provides audit info
+  version: "1.0.0"
+  title: Audit API
+  contact:
+    email: hmak28@my.bcit.ca
+paths:
+  /weight:
+    get:
+      summary: gets a weight reading from history
+      operationId: app.get_weight_reading
+      description: Gets weight readings from the event store
+      parameters:
+        - name: index
+          in: query
+          description: Gets the weight at the index in the event store
+          schema:
+            type: integer
+            example: 100
+      responses:
+        '200':
+          description: Successfully returned a weight event
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                $ref: '#/components/schemas/WeightReading'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /calories:
+    get:
+      summary: gets a calories reading from history
+      operationId: app.get_calories_reading
+      description: Gets calories readings from the event store
+      parameters:
+        - name: index
+          in: query
+          description: Gets the calories at the index in the event store
+          schema:
+            type: integer
+            example: 100
+      responses:
+        '200':
+          description: Successfully returned a calories event
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                $ref: '#/components/schemas/CaloriesReading'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+components:
+  schemas:
+    WeightReading:
+      required:
+      - timestamp
+      - user_id
+      - user_name
+      - weight
+      properties:
+        user_id:
+          type: integer
+          example: 1
+        user_name:
+          type: string
+          example: Tom Chong
+        weight:
+          type: integer
+          example: 60
+        timestamp:
+          type: string
+          format: date-time
+          example: 2016-08-29T09:12:33.001Z
+      type: object
+
+    CaloriesReading:
+      required:
+      - calories
+      - timestamp
+      - user_id
+      - user_name
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1
+        user_name:
+          type: string
+          example: Tom Chong
+        calories:
+          type: integer
+          example: 2000
+        timestamp:
+          type: string
+          format: date-time
+          example: 2016-08-29T09:12:33.001Z

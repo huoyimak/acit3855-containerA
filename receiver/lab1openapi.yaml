@@ -1,0 +1,95 @@
+---
+openapi: 3.0.0
+info:
+  title: Records API
+  description: This API receives records from users' devices
+  contact:
+    email: hmak28@my.bcit.ca
+  version: 1.0.0
+#servers:
+#- url: https://virtserver.swaggerhub.com/Kloe/Records/1.0.0
+#  description: SwaggerHub API Auto Mocking
+tags:
+- name: devices
+  description: Operations available to users and trainers
+paths:
+  /readings/weight:
+    post:
+      tags:
+      - devices
+      summary: reports a weight reading
+      description: Adds a new weight reading to the system
+      operationId: app.report_weight_reading
+      requestBody:
+        description: Reading item to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeightReading'
+      responses:
+        "201":
+          description: item created
+        "400":
+          description: invalid input, object invalid
+  /readings/calories:
+    post:
+      tags:
+      - devices
+      summary: reports a calories reading
+      description: Adds a new calories reading to the system
+      operationId: app.report_calories_reading
+      requestBody:
+        description: Reading item to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaloriesReading'
+      responses:
+        "201":
+          description: item created
+        "400":
+          description: invalid input, object invalid
+components:
+  schemas:
+    WeightReading:
+      required:
+      - timestamp
+      - user_id
+      - user_name
+      - weight
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1
+        user_name:
+          type: string
+          example: Tom Chong
+        weight:
+          type: integer
+          example: 60
+        timestamp:
+          type: string
+          format: date-time
+          example: 2016-08-29T09:12:33.001Z
+    CaloriesReading:
+      required:
+      - calories
+      - timestamp
+      - user_id
+      - user_name
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1
+        user_name:
+          type: string
+          example: Tom Chong
+        calories:
+          type: integer
+          example: 2000
+        timestamp:
+          type: string
+          format: date-time
+          example: 2016-08-29T09:12:33.001Z

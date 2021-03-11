@@ -1,0 +1,9 @@
+version: 1
+weightstore:
+    url: http://localhost:8090/readings/weight
+caloriesstore:
+    url: http://localhost:8090/readings/calories
+events:
+    hostname: acit3855-kafka.eastus2.cloudapp.azure.com
+    port: 9092
+    topic: events

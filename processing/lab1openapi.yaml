@@ -1,0 +1,63 @@
+---
+openapi: 3.0.0
+info:
+  title: Stats API
+  description: This API provides event stats
+  contact:
+    email: hmak28@my.bcit.ca
+  version: 1.0.0
+#servers:
+#- url: https://virtserver.swaggerhub.com/Kloe/Records/1.0.0
+#  description: SwaggerHub API Auto Mocking
+
+paths:
+  /stats:
+    get: 
+      summary: Gets the event stats
+      operationId: app.get_stats
+      description: Gets Weight and Calories processsed statistics
+      responses:
+        '200':
+          description: Successfully returned a list of weight events
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+components:
+  schemas:
+    ReadingStats:
+      required:
+        - num_weight_readings
+        - max_weight_reading
+        - min_weight_reading
+        - num_calories_readings
+        - avg_calories_reading
+      properties:
+        num_weight_readings:
+          type: integer
+          example: 2
+        max_weight_reading:
+          type: integer
+          example: 130
+        min_weight_reading:
+          type: integer
+          example: 100
+        num_calories_readings:
+          type: integer
+          example: 3
+        avg_calories_reading:
+          type: integer
+          example: 2000
+      type: object
