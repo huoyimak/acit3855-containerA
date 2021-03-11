@@ -47,7 +47,8 @@ services:
     image: receiver
     ports:
       - '8080:8080'
-    depends_on: "kafka"
+    depends_on: 
+      - "kafka"
   storage:
     image: storage
     ports:
@@ -58,12 +59,14 @@ services:
   processing:
     image: processing
     network_mode: "host"
-    depends_on: "storage"
+    depends_on: 
+      - "storage"
   audit_log:
     image: audit_log
-    posts:
+    ports:
       - '8110:8110'
-    depends_on: "kafka"
+    depends_on: 
+      - "kafka"
 
 # Names our volume
 volumes:
